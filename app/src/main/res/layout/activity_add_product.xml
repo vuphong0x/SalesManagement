@@ -70,6 +70,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                app:boxBackgroundColor="@color/white"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/black"
                 app:errorTextColor="#FFFFFF"
@@ -96,6 +97,7 @@
             app:cardElevation="8dp">
             <com.google.android.material.textfield.TextInputLayout
                 app:hintEnabled="true"
+                app:boxBackgroundColor="@color/white"
                 app:hintTextColor="@color/black"
                 app:boxStrokeColor="@color/black"
                 android:layout_width="match_parent"
@@ -123,7 +125,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintTextColor="@color/black"
-                app:boxStrokeColor="@color/black">
+                app:boxStrokeColor="@color/black"
+                app:boxBackgroundColor="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -143,17 +146,25 @@
 
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp">
-            <com.google.android.material.textfield.TextInputLayout
-                app:hintEnabled="true"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/black"
-                app:boxStrokeColor="@color/black">
-                <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="Size: "
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Xuất xứ sản phẩm"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="center"/>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

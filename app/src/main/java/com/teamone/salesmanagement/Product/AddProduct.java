@@ -15,14 +15,18 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.teamone.salesmanagement.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddProduct extends AppCompatActivity {
 ImageView imageView;
@@ -31,6 +35,15 @@ ImageView imageView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         imageView = findViewById(R.id.addAnhSanPham);
+      Spinner spinner = findViewById(R.id.size);
+        List<String> list = new ArrayList<>();
+        list.add("M (45-58kg)");
+        list.add("L (58-68kg)");
+        list.add("XL (68-78kg)");
+        list.add("2XL (78-88kg)");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,list);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner.setAdapter(adapter);
     }
 
     public void themAnhSanPham(View view) {
