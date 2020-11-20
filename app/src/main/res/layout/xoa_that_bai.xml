@@ -8,12 +8,12 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/success"
+        android:src="@drawable/fail"
         android:layout_gravity="center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm thành công"
+        android:text="Xóa thất bại"
         android:textSize="50dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"/>
