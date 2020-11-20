@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.teamone.salesmanagement">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
-       "/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,9 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SalesManagement">
-        <activity android:name=".Product.ListProduct"/>
-        <activity android:name=".Product.AddProduct"/>
-        <activity android:name=".Product.EditProduct"/>
+        <activity android:name=".Bill.SettingProductOnBill"></activity>
+        <activity android:name=".Customer.EditCustomer" />
+        <activity android:name=".Customer.Addcustomer" />
+        <activity android:name=".Customer.ListCustomer" />
+        <activity android:name=".Bill.BillDetail" />
+        <activity android:name=".Bill.AddBill" />
+        <activity android:name=".Bill.ListBill" />
+        <activity android:name=".Product.ListProduct" />
+        <activity android:name=".Product.AddProduct" />
+        <activity android:name=".Product.EditProduct" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

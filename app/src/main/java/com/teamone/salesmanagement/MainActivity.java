@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.teamone.salesmanagement.Bill.ListBill;
+import com.teamone.salesmanagement.Customer.ListCustomer;
 import com.teamone.salesmanagement.Product.ListProduct;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,11 +24,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void donHang(View view) {
+        Intent intent = new Intent(MainActivity.this, ListBill.class);
+        startActivity(intent);
     }
 
     public void doanhThu(View view) {
+
     }
 
     public void khachHang(View view) {
+        Intent intent = new Intent(MainActivity.this, ListCustomer.class);
+        startActivity(intent);
     }
 }
