@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ECECEC"
+    android:orientation="vertical"
     tools:context=".Product.ListProduct">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDanhSachSanPham"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffca60"
         app:title="Danh sách sản phẩm"
-        app:titleMarginStart="60dp"/>
+        app:titleMarginStart="60dp" />
+
     <ListView
+        android:id="@+id/listSanPham"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listSanPham"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

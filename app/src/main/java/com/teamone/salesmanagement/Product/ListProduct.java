@@ -17,6 +17,7 @@ public class ListProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_product);
+
         Toolbar toolbar = findViewById(R.id.toolbarDanhSachSanPham);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -32,7 +33,7 @@ public class ListProduct extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.themSanPham){
-            Intent intent = new Intent(ListProduct.this,AddProduct.class);
+            Intent intent = new Intent(ListProduct.this, AddProductActivity.class);
             startActivity(intent);
         }
         return true;

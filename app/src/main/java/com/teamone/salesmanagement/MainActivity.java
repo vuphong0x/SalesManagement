@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doanhThu(View view) {
-
+        Intent intent = new Intent(MainActivity.this, ListBill.class);
+        startActivity(intent);
     }
 
     public void khachHang(View view) {
