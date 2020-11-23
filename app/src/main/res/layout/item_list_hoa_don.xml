@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/tvMaHoaDon"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="Mã hóa đơn:"
@@ -28,7 +28,7 @@
             android:id="@+id/tvThanhTien"
             android:text="Thành tiền:"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical" />
     </LinearLayout>
@@ -36,6 +36,7 @@
         android:id="@+id/ivDeleteTL"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="5dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_baseline_navigate_next_24" />
 </RelativeLayout>
