@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SalesManagement">
-        <activity android:name=".Bill.SettingProductOnBill"></activity>
+        <activity android:name=".Revenue.Revenue"></activity>
+        <activity android:name=".Bill.SettingProductOnBill" />
         <activity android:name=".Customer.EditCustomer" />
         <activity android:name=".Customer.Addcustomer" />
         <activity android:name=".Customer.ListCustomer" />
