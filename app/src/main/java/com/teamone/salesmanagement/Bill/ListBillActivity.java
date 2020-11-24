@@ -8,15 +8,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.teamone.salesmanagement.R;
 
-public class ListBill extends AppCompatActivity {
+public class ListBillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_bill);
+
         Toolbar toolbar = findViewById(R.id.toolbarDanhSachHoaDon);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,10 +32,16 @@ public class ListBill extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.themSanPham){
-            Intent intent = new Intent(ListBill.this, AddBill.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.themSanPham:
+                Intent intent = new Intent(ListBillActivity.this, AddBillActivity.class);
+                startActivity(intent);
+                break;
         }
         return true;
     }
+
 }

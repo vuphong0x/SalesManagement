@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.teamone.salesmanagement.R;
 
-public class SettingProductOnBill extends AppCompatActivity {
+public class SettingProductOnBillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

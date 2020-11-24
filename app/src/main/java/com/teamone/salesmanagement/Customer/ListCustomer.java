@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.teamone.salesmanagement.Bill.AddBill;
-import com.teamone.salesmanagement.Bill.ListBill;
 import com.teamone.salesmanagement.R;
 
 public class ListCustomer extends AppCompatActivity {
