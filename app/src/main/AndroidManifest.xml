@@ -27,6 +27,7 @@
         <activity android:name=".Product.ListProduct" />
         <activity android:name=".Product.AddProductActivity" />
         <activity android:name=".Product.EditProduct" />
+        <activity android:name=".Revenue.RevenueActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

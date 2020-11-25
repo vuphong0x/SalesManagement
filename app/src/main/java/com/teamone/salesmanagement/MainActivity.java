@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.teamone.salesmanagement.Bill.ListBillActivity;
 import com.teamone.salesmanagement.Customer.ListCustomer;
 import com.teamone.salesmanagement.Product.ListProduct;
+import com.teamone.salesmanagement.Revenue.RevenueActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doanhThu(View view) {
-        Intent intent = new Intent(MainActivity.this, ListBillActivity.class);
+        Intent intent = new Intent(MainActivity.this, RevenueActivity.class);
         startActivity(intent);
     }
 
