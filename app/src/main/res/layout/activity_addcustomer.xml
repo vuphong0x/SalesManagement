@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ECECEC"
-    tools:context=".Customer.Addcustomer">
+    tools:context=".Customer.AddCustomerActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffca60"
         app:title="Thêm khách hàng"
-        android:id="@+id/tbaddKhachHang"
+        android:id="@+id/toolbar"
         app:titleMarginStart="130dp" />
     <GridLayout
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/tbaddKhachHang"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/grThemSanPham"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

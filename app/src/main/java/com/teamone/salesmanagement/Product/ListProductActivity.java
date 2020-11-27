@@ -9,18 +9,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.teamone.salesmanagement.Customer.AddCustomerActivity;
 import com.teamone.salesmanagement.R;
 
-public class ListProduct extends AppCompatActivity {
+public class ListProductActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_product);
 
-        Toolbar toolbar = findViewById(R.id.toolbarDanhSachSanPham);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -31,11 +34,17 @@ public class ListProduct extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.themSanPham){
-            Intent intent = new Intent(ListProduct.this, AddProductActivity.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.themSanPham:
+                Intent intent = new Intent(ListProductActivity.this, AddProductActivity.class);
+                startActivity(intent);
+                break;
+
         }
         return true;
     }
+
 }

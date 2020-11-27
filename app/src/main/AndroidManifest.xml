@@ -18,17 +18,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SalesManagement">
         <activity android:name=".Bill.SettingProductOnBillActivity"></activity>
-        <activity android:name=".Customer.EditCustomer" />
-        <activity android:name=".Customer.Addcustomer" />
-        <activity android:name=".Customer.ListCustomer" />
-        <activity android:name=".Bill.BillDetailActivity" />
-        <activity android:name=".Bill.AddBillActivity" />
-        <activity android:name=".Bill.ListBillActivity" />
-        <activity android:name=".Product.ListProduct" />
-        <activity android:name=".Product.AddProductActivity" />
-        <activity android:name=".Product.EditProduct" />
-        <activity android:name=".Revenue.RevenueActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".Customer.EditCustomerActivity"
+            android:label="Sửa khách hàng" />
+        <activity
+            android:name=".Customer.AddCustomerActivity"
+            android:label="Thêm khách hàng" />
+        <activity
+            android:name=".Customer.ListCustomerActivity"
+            android:label="hách hàng" />
+        <activity
+            android:name=".Bill.BillDetailActivity"
+            android:label="Chi tiết hóa đơn" />
+        <activity
+            android:name=".Bill.AddBillActivity"
+            android:label="Thêm hóa đơn" />
+        <activity
+            android:name=".Bill.ListBillActivity"
+            android:label="Danh sách hóa đơn" />
+        <activity
+            android:name=".Product.ListProductActivity"
+            android:label="Danh sách sản phẩm" />
+        <activity
+            android:name=".Product.AddProductActivity"
+            android:label="Thêm sản phẩm" />
+        <activity
+            android:name=".Product.EditProductActivity"
+            android:label="Sửa sản phẩm" />
+        <activity
+            android:name=".Revenue.RevenueActivity"
+            android:label="Doanh thu" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Trang chủ" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

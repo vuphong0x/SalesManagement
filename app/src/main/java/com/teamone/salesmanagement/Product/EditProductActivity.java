@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.teamone.salesmanagement.R;
 
-public class EditProduct extends AppCompatActivity {
+public class EditProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

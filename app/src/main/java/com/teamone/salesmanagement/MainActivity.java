@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.teamone.salesmanagement.Bill.ListBillActivity;
-import com.teamone.salesmanagement.Customer.ListCustomer;
-import com.teamone.salesmanagement.Product.ListProduct;
+import com.teamone.salesmanagement.Customer.ListCustomerActivity;
+import com.teamone.salesmanagement.Product.ListProductActivity;
 import com.teamone.salesmanagement.Revenue.RevenueActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sanPham(View view) {
-        Intent intent = new Intent(MainActivity.this, ListProduct.class);
+        Intent intent = new Intent(MainActivity.this, ListProductActivity.class);
         startActivity(intent);
     }
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void khachHang(View view) {
-        Intent intent = new Intent(MainActivity.this, ListCustomer.class);
+        Intent intent = new Intent(MainActivity.this, ListCustomerActivity.class);
         startActivity(intent);
     }
 }

@@ -11,15 +11,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.teamone.salesmanagement.Customer.Addcustomer;
+import com.teamone.salesmanagement.Customer.AddCustomerActivity;
 import com.teamone.salesmanagement.Customer.Customer;
-import com.teamone.salesmanagement.Product.ListProduct;
+import com.teamone.salesmanagement.Product.ListProductActivity;
 import com.teamone.salesmanagement.R;
 
 import java.text.SimpleDateFormat;
@@ -107,12 +106,12 @@ public class AddBillActivity extends AppCompatActivity implements DatePickerDial
     }
 
     public void themSPMua(View view) {
-        Intent intent = new Intent(AddBillActivity.this, ListProduct.class);
+        Intent intent = new Intent(AddBillActivity.this, ListProductActivity.class);
         startActivity(intent);
     }
 
     public void themKH(View view) {
-        Intent intent = new Intent(AddBillActivity.this, Addcustomer.class);
+        Intent intent = new Intent(AddBillActivity.this, AddCustomerActivity.class);
         startActivity(intent);
     }
 

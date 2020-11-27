@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:background="#ECECEC"
     android:orientation="vertical"
-    tools:context=".Product.ListProduct">
+    tools:context=".Product.ListProductActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarDanhSachSanPham"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffca60"
