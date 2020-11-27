@@ -24,6 +24,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Xong"
+        android:id="@+id/ok"
         android:textSize="30dp"
         app:backgroundTint="#000000" />
 </LinearLayout>

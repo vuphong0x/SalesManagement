@@ -30,7 +30,7 @@ public class ListBill extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.themSanPham){
+        if (id == R.id.themKhachHang){
             Intent intent = new Intent(ListBill.this, AddBill.class);
             startActivity(intent);
         }

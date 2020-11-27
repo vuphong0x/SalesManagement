@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:padding="4dp">
     <ImageView
         android:id="@+id/ivIconTL"
@@ -11,34 +11,66 @@
         android:scaleType="fitXY" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginRight="50dp"
         android:layout_toRightOf="@+id/ivIconTL"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvTenSP"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="Tên sản phẩm:"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tvSize"
-            android:text="Size:"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Tên sản phẩm:"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tvTenSP"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical" />
-        <TextView
-            android:id="@+id/tvGia"
-            android:text="Giá:"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical" />
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
+            <TextView
+                android:text="Price:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tvPrice"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
+            <TextView
+                android:text="Address:"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tvAddressSP"/>
+        </LinearLayout>
     </LinearLayout>
     <ImageView
-        android:id="@+id/ivDeleteTL"
+        android:id="@+id/ivItemSP"
         android:layout_width="48dp"
         android:layout_marginTop="13dp"
         android:layout_height="48dp"

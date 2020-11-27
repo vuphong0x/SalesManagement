@@ -15,29 +15,32 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.teamone.salesmanagement.R;
+import com.teamone.salesmanagement.database.ProductDAO;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddProductActivity extends AppCompatActivity {
     private ImageView imgProduct;
-    private EditText edtProductCode, edtProductName, edtProductPrice, edtProductSize;
+    TextInputEditText tieID,tieName,tiePrice,tieAddress;
+    ProductDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         imgProduct = findViewById(R.id.addAnhSanPham);
+        tieID = findViewById(R.id.tieIdProduct);
+        tieName = findViewById(R.id.tieNameProduct);
+        tiePrice = findViewById(R.id.tiePriceProduct);
+        tieAddress = findViewById(R.id.tieAddressProduct);
 
     }
 
@@ -100,6 +103,20 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     public void addSanPham(View view) {
-
+        dao = new ProductDAO(this);
+        int img = imgProduct.getImageAlpha();
+        String id = tieID.getText().toString();
+        String name = tieName.getText().toString();
+        String price = tiePrice.getText().toString();
+        String address = tieAddress.getText().toString();
+//        Product product = new Product(id,img,name,price,address);
+    }
+    public int validate(){
+        int check = 1;
+        if (tieID.getText().length() == 0 || tieName.getText().length() == 0
+        || tiePrice.getText().length()==0 || tieAddress.getText().length()==0){
+            check = -1;
+        }
+        return check;
     }
 }
