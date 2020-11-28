@@ -18,7 +18,7 @@ import com.teamone.salesmanagement.database.CustomerDAO;
 
 public class EditCustomer extends AppCompatActivity {
     TextInputEditText tieDetailPhone,tieDetailName,tieDetailDateOfBirth,tieDetailAddress,tieDetailID;
-    CustomerDAO dao;
+    CustomerDAO dao  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
