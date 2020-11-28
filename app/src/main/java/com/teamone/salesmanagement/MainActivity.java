@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sanPham(View view) {
-        Intent intent = new Intent(MainActivity.this, ListProductActivity.class);
+//        Intent intent = new Intent(MainActivity.this, ListProductActivity.class);
+//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, ListCustomerActivity.class);
         startActivity(intent);
     }
 
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void khachHang(View view) {
-        Intent intent = new Intent(MainActivity.this, ListCustomerActivity.class);
-        startActivity(intent);
+
     }
 }

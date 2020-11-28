@@ -8,12 +8,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.teamone.salesmanagement.R;
+import com.teamone.salesmanagement.database.CustomerDAO;
+
+import java.util.List;
 
 public class ListCustomerActivity extends AppCompatActivity {
     private Toolbar toolbar;
-
+    ListView lvList;
+    CustomerDAO dao;
+    List<Customer> customerList;
+    CustomerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,13 @@ public class ListCustomerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        lvList = findViewById(R.id.listKhachHang);
+
+        dao = new CustomerDAO(this);
+        customerList = dao.getAllCustomer();
+        adapter = new CustomerAdapter(this,customerList);
+        lvList.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,5 +57,12 @@ public class ListCustomerActivity extends AppCompatActivity {
 
         }
         return true;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        customerList.clear();
+        customerList = dao.getAllCustomer();
+        adapter.changeDataset(customerList);
     }
 }

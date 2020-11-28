@@ -1,16 +1,35 @@
 package com.teamone.salesmanagement.Customer;
 
 public class Customer {
-    private String name;
-    private String dateOfBirth;
-    private String address;
-    private String phoneNumber;
+    String idCustomer;
+    String phone,name,dateOfBirth,address;
 
-    public Customer(String name, String dateOfBirth, String address, String phoneNumber) {
+    public Customer() {
+    }
+
+
+    public Customer(String idCustomer, String phone, String name, String dateOfBirth, String address) {
+        this.idCustomer = idCustomer;
+        this.phone = phone;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+    }
+
+    public String getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getName() {
@@ -35,13 +54,5 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }
