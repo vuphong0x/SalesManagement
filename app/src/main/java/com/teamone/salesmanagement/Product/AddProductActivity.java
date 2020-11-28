@@ -50,7 +50,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    public void themAnhSanPham(View view) {
+    public void addProductPicture(View view) {
         Dialog dialog = new Dialog(AddProductActivity.this);
         dialog.setContentView(R.layout.themanh);
         Button button1 = dialog.findViewById(R.id.btnCamera);
@@ -77,6 +77,11 @@ public class AddProductActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+
+    public void addProduct(View view) {
+
     }
 
     @Override
@@ -106,10 +111,6 @@ public class AddProductActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "ko mo dc camera", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void addSanPham(View view) {
-
     }
 
     @Override

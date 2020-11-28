@@ -17,7 +17,7 @@
         android:roundIcon="@drawable/app_icon_sama"
         android:supportsRtl="true"
         android:theme="@style/Theme.SalesManagement">
-        <activity android:name=".Bill.SettingProductOnBillActivity"></activity>
+        <activity android:name=".Bill.SettingProductOnBillActivity" />
         <activity
             android:name=".Customer.EditCustomerActivity"
             android:label="Sửa khách hàng" />
