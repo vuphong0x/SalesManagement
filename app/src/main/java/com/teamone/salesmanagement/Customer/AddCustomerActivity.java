@@ -13,7 +13,8 @@ import com.teamone.salesmanagement.R;
 
 public class AddCustomerActivity extends AppCompatActivity {
     private Toolbar toolbar;
-
+    TextInputEditText tiePhone,tieName,tieDateOfBirth,tieAddress,tieID;
+    CustomerDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
