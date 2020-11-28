@@ -1,4 +1,3 @@
-
 package com.teamone.salesmanagement.database;
 
 import android.content.Context;
@@ -14,13 +13,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL(CustomerDAO.SQL_CUSTOMER);
+        db.execSQL(CustomerDAO.SQL_CUSTOMER);
         db.execSQL(ProductDAO.SQL_PRODUCT);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-//        db.execSQL("DROP TABLE IF EXISTS " + CustomerDAO.CUSTOMER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CustomerDAO.CUSTOMER_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ProductDAO.PRODUCT_TABLE_NAME);
 
     }

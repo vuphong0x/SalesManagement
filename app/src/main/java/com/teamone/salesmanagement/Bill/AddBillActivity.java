@@ -58,9 +58,9 @@ public class AddBillActivity extends AppCompatActivity implements DatePickerDial
     }
 
     public void getCustomer() {
-        customersList.add(new Customer("Khách hàng 01", "01/05/2001", "Hải Dương", "0395436290"));
-        customersList.add(new Customer("Khách hàng 02", "01/05/2001", "Hải Dương", "0395436290"));
-        customersList.add(new Customer("Khách hàng 03", "01/05/2001", "Hải Dương", "0395436290"));
+//        customersList.add(new Customer("Khách hàng 01", "01/05/2001", "Hải Dương", "0395436290"));
+//        customersList.add(new Customer("Khách hàng 02", "01/05/2001", "Hải Dương", "0395436290"));
+//        customersList.add(new Customer("Khách hàng 03", "01/05/2001", "Hải Dương", "0395436290"));
         for (Customer customer: customersList) {
             customerNameList.add(customer.getName());
         }
