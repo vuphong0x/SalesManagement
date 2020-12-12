@@ -10,13 +10,13 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="#ffca60"
         app:title="Danh sách sản phẩm"
         app:titleMarginStart="60dp" />
 
-    <ListView
-        android:id="@+id/listSanPham"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/rvProduct"/>
 </LinearLayout>

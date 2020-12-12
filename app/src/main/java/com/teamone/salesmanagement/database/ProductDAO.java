@@ -16,10 +16,10 @@ public class ProductDAO {
     private final SQLiteOpenHelper helper;
     public final static String PRODUCT_TABLE_NAME ="product";
     public static final String SQL_PRODUCT = "CREATE TABLE product(" +
-            "id TEXT PRIMARY KEY, " +
+            "code TEXT PRIMARY KEY, " +
             "image BLOB, " +
             "name TEXT, " +
-            "price INTEGER, " +
+            "price TEXT, " +
             "size TEXT" +
             ");";
     public ProductDAO(final Context context){
@@ -28,52 +28,73 @@ public class ProductDAO {
     }
     public List<Product> getAllProduct(){
         List<Product> listProduct = new ArrayList<>();
-        Cursor cursor = db.query(PRODUCT_TABLE_NAME,null,null,null,null,null,null);
+        Cursor cursor = db.query(PRODUCT_TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();
-        while (cursor.isAfterLast()==false){
+        while (cursor.isAfterLast() == false) {
             Product product = new Product();
-            product.setProductCode(cursor.getString(0));
-            product.setProductImage(cursor.getBlob(1));
-            product.setProductName(cursor.getString(2));
-            product.setProductPrice(cursor.getString(3));
-            product.setProductSize(cursor.getString(4));
+            product.setProductCode(cursor.getString(cursor.getColumnIndex("code")));
+            product.setProductImage(cursor.getBlob(cursor.getColumnIndex("image")));
+            product.setProductName(cursor.getString(cursor.getColumnIndex("name")));
+            product.setProductPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+            product.setProductSize(cursor.getString(cursor.getColumnIndex("size")));
             listProduct.add(product);
             cursor.moveToNext();
         }
         cursor.close();
         return listProduct;
     }
-    public int insertProduct(Product product){
+
+        public Product getProductById(String productId) {
+        Product product = null;
+        String selection = "code=?";
+        String[] selectionArgs = {productId};
+        Cursor cursor = db.query(PRODUCT_TABLE_NAME, null, selection, selectionArgs, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            product = new Product();
+            product.setProductCode(cursor.getString(cursor.getColumnIndex("code")));
+            product.setProductImage(cursor.getBlob(cursor.getColumnIndex("image")));
+            product.setProductName(cursor.getString(cursor.getColumnIndex("name")));
+            product.setProductPrice(cursor.getDouble(cursor.getColumnIndex("price")));
+            product.setProductSize(cursor.getString(cursor.getColumnIndex("size")));
+            break;
+        }
+        cursor.close();
+        return product;
+    }
+
+    public int insertProduct(Product product) {
         ContentValues values = new ContentValues();
-        values.put("image",product.getImg());
-        values.put("id",product.getId());
-        values.put("name",product.getName());
-        values.put("price",product.getPrice());
-        values.put("address",product.getAddress());
-        try{
-            if (db.insert(PRODUCT_TABLE_NAME,null,values) < 0){
+        values.put("code", product.getProductCode());
+        values.put("image", product.getProductImage());
+        values.put("name", product.getProductName());
+        values.put("price", product.getProductPrice());
+        values.put("size", product.getProductSize());
+        try {
+            if (db.insert(PRODUCT_TABLE_NAME, null, values) < 0) {
                 return -1;
             }
-        }catch (Exception e ){
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return 1;
     }
-    public int updateProduct(Product product){
+
+    public int updateProduct(Product product) {
         ContentValues values = new ContentValues();
-        values.put("image",product.getImg());
-        values.put("id",product.getId());
-        values.put("name",product.getName());
-        values.put("price",product.getPrice());
-        values.put("address",product.getAddress());
-        int kq = db.update(PRODUCT_TABLE_NAME,values,"id=?",new String[]{product.getId()});
-        if (kq==0){
+        values.put("image", product.getProductImage());
+        values.put("code", product.getProductCode());
+        values.put("name", product.getProductName());
+        values.put("price", product.getProductPrice());
+        values.put("size", product.getProductSize());
+        int kq = db.update(PRODUCT_TABLE_NAME, values, "code=?", new String[]{product.getProductCode()});
+        if (kq == 0) {
             return -1;
         }
         return 1;
     }
     public int delProduct(String idProduct){
-        int kq = db.delete(PRODUCT_TABLE_NAME,"id=?",new String[]{idProduct});
+        int kq = db.delete(PRODUCT_TABLE_NAME, "code=?", new String[]{idProduct});
         if (kq==0){
             return -1;
         }

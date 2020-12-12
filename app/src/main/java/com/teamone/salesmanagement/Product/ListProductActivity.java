@@ -1,34 +1,86 @@
 package com.teamone.salesmanagement.Product;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.teamone.salesmanagement.Customer.AddCustomerActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.teamone.salesmanagement.R;
+import com.teamone.salesmanagement.database.ProductDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListProductActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+    Toolbar toolbar;
+    RecyclerView rvProduct;
+    ProductAdapter adapter;
+    List<Product> productList;
+    ProductDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_product);
 
+        // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        productList = new ArrayList<>();
+        dao = new ProductDAO(this);
+        productList.addAll(dao.getAllProduct());
+
+        // RecycleView
+        rvProduct = findViewById(R.id.rvProduct);
+        rvProduct.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvProduct.setLayoutManager(layoutManager);
+        adapter = new ProductAdapter(productList);
+        rvProduct.setAdapter(adapter);
+
+        // ContextMenu
+        registerForContextMenu(rvProduct);
     }
+
+    //    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        getMenuInflater().inflate(R.menu.context_menu, menu);
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        int position = -1;
+//        try {
+//            position = this.getAdapter()).getPosition();
+//        } catch (Exception e) {
+//            Log.d("TAG", e.getLocalizedMessage(), e);
+//            return super.onContextItemSelected(item);
+//        }
+//        switch (item.getItemId()) {
+//            case R.id.ctx_menu_remove_backup:
+//                // do your stuff
+//                break;
+//            case R.id.ctx_menu_restore_backup:
+//                // do your stuff
+//                break;
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 

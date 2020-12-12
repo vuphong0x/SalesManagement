@@ -1,59 +1,61 @@
 package com.teamone.salesmanagement.Product;
 
-import android.graphics.Bitmap;
 
 public class Product {
-    int img;
-    String id, name, price, address;
+    byte[] productImage;
+    String productCode;
+    String productName;
+    double productPrice;
+    String productSize;
 
     public Product() {
     }
 
-    public Product(int img, String id, String name, String price, String address) {
-        this.img = img;
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.address = address;
+    public Product(byte[] productImage, String productCode, String productName, double productPrice, String productSize) {
+        this.productImage = productImage;
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productSize = productSize;
     }
 
-    public int getImg() {
-        return img;
+    public byte[] getProductImage() {
+        return productImage;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setProductImage(byte[] imageProduct) {
+        this.productImage = imageProduct;
     }
 
-    public String getId() {
-        return id;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getPrice() {
-        return price;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public String getAddress() {
-        return address;
+    public String getProductSize() {
+        return productSize;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setProductSize(String productSize) {
+        this.productSize = productSize;
     }
 }

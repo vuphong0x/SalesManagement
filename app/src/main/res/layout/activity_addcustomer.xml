@@ -4,99 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_gray_50"
     android:orientation="vertical"
-    android:background="#ECECEC"
-    tools:context=".Customer.AddCustomerActivity"
-    android:padding="5dp">
+    tools:context=".Customer.AddCustomerActivity">
+
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffca60"
         app:title="Thêm khách hàng"
-        android:id="@+id/tbaddKhachHang"
         app:titleMarginStart="130dp" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp">
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginBottom="8dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieID"
+        <EditText
+            android:id="@+id/edtID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
             android:hint="ID" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/black"
-        android:layout_margin="10dp">
+        android:layout_marginHorizontal="8dp"
+        app:boxStrokeWidth="0dp"
+        android:layout_marginBottom="8dp"
+        app:boxStrokeWidthFocused="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiePhone"
+        <EditText
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/black"
-        android:layout_margin="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
             android:hint="Name" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/black"
-        android:layout_margin="10dp">
+        android:layout_marginHorizontal="8dp"
+        app:boxStrokeWidth="0dp"
+        android:layout_marginBottom="8dp"
+        app:boxStrokeWidthFocused="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieDateOfBirth"
+        <EditText
+            android:id="@+id/edtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
+            android:hint="Phone Number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        app:boxStrokeWidth="0dp"
+        android:layout_marginBottom="8dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <EditText
+            android:id="@+id/edtDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
             android:hint="Date Of Birth" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeColor="@color/black"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/black"
-        android:layout_margin="10dp">
+        android:layout_marginHorizontal="8dp"
+        app:boxStrokeWidth="0dp"
+        android:layout_marginBottom="8dp"
+        app:boxStrokeWidthFocused="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tieAddress"
+        <EditText
+            android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
             android:hint="Địa chỉ" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
+        android:layout_marginTop="24dp"
+        android:background="@drawable/round_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Add"
-        android:onClick="addKhachHang"/>
+        android:onClick="addKhachHang"
+        android:paddingVertical="8dp"
+        android:text="Thêm Khách Hàng" />
 </LinearLayout>

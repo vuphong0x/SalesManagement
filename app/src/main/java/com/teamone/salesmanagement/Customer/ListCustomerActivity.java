@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.CustomerDAO;
 
@@ -46,12 +47,14 @@ public class ListCustomerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                intent = new Intent(ListCustomerActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
             case R.id.themSanPham:
-                Intent intent = new Intent(ListCustomerActivity.this, AddCustomerActivity.class);
+                intent = new Intent(ListCustomerActivity.this, AddCustomerActivity.class);
                 startActivity(intent);
                 break;
 

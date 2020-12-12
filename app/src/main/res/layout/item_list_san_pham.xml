@@ -1,47 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:padding="4dp">
-    <ImageView
-        android:id="@+id/ivIconTL"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/product"
-        android:scaleType="fitXY" />
-    <LinearLayout
+    android:layout_height="90dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginBottom="3dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_toRightOf="@+id/ivIconTL"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:srcCompat="@drawable/product" />
+
         <TextView
-            android:id="@+id/tvTenSP"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="Tên sản phẩm:"
-            android:textStyle="bold" />
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="none"
+            android:text="Name"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            card_view:layout_constraintStart_toEndOf="@+id/imgProduct"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButtonArrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:srcCompat="@drawable/ic_baseline_add_circle_24"
+            tools:ignore="VectorDrawableCompat" />
+
         <TextView
             android:id="@+id/tvSize"
-            android:text="Size:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical" />
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="4dp"
+            android:text="Size"
+            card_view:layout_constraintStart_toEndOf="@+id/imgProduct"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvName" />
+
         <TextView
-            android:id="@+id/tvGia"
-            android:text="Giá:"
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical" />
-    </LinearLayout>
-    <ImageView
-        android:id="@+id/ivDeleteTL"
-        android:layout_width="48dp"
-        android:layout_marginTop="13dp"
-        android:layout_height="48dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_baseline_navigate_next_24" />
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="4dp"
+            android:text="Price"
+            card_view:layout_constraintStart_toEndOf="@+id/imgProduct"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvSize" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

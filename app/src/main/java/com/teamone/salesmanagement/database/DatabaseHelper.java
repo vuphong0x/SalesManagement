@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CustomerDAO.SQL_CUSTOMER);
         db.execSQL(ProductDAO.SQL_PRODUCT);
+        db.execSQL(BillDAO.SQL_BILL);
     }
 
     @Override

@@ -1,49 +1,72 @@
-package com.teamone.salesmanagement.Bill;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+ package com.teamone.salesmanagement.Bill;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamone.salesmanagement.Customer.AddCustomerActivity;
 import com.teamone.salesmanagement.Customer.Customer;
 import com.teamone.salesmanagement.Product.ListProductActivity;
+import com.teamone.salesmanagement.Product.Product;
+import com.teamone.salesmanagement.Product.ProductAdapter;
 import com.teamone.salesmanagement.R;
+import com.teamone.salesmanagement.database.BillDAO;
+import com.teamone.salesmanagement.database.CustomerDAO;
+import com.teamone.salesmanagement.database.ProductDAO;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
-public class AddBillActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+ public class AddBillActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText editTextNgayTaoDon;
+    TextView tvTotalMoney;
     private Spinner spinnerCustomer;
     private List<Customer> customersList;
+    public static List<Product> productList = new ArrayList<>();
     private List<String> customerNameList;
     private Toolbar toolbar;
+    private RecyclerView rvSanPhamDaChon;
+    ProductOnBillAdapter productOnBillAdapter;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    CustomerDAO customerDAO;
+    BillDAO billDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bill);
 
+        Log.e("TAG", "onCreate");
         toolbar = findViewById(R.id.toolbaraddbill);
         setSupportActionBar(toolbar);
+
+        tvTotalMoney = findViewById(R.id.tvTongTien);
         editTextNgayTaoDon = findViewById(R.id.edNgayTaoDOn);
         spinnerCustomer = findViewById(R.id.spinnerCustomer);
+        rvSanPhamDaChon = findViewById(R.id.rvSanPhamDaChon);
+
         customersList = new ArrayList();
         customerNameList = new ArrayList();
 
@@ -51,17 +74,31 @@ public class AddBillActivity extends AppCompatActivity implements DatePickerDial
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Get customer from spinner
         getCustomer();
+
+        // RecycleView
+        rvSanPhamDaChon = findViewById(R.id.rvSanPhamDaChon);
+        rvSanPhamDaChon.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvSanPhamDaChon.setLayoutManager(layoutManager);
+        getProduct();
+        productOnBillAdapter = new ProductOnBillAdapter(productList);
+        rvSanPhamDaChon.setAdapter(productOnBillAdapter);
     }
 
-
     public void addHoaDon(View view) {
+        billDAO = new BillDAO(this);
+        Bill bill = new Bill();
+        bill.setMaHoaDon("HD" + new Random().nextInt(9999));
+        bill.setTenKhachHang(spinnerCustomer.getSelectedItem().toString());
+        bill.setTongTien(String.valueOf(sumOfProductPrice()));
+        billDAO.insertBill(bill);
+        Toast.makeText(this, "Successfully!", Toast.LENGTH_SHORT).show();
     }
 
     public void getCustomer() {
-//        customersList.add(new Customer("Khách hàng 01", "01/05/2001", "Hải Dương", "0395436290"));
-//        customersList.add(new Customer("Khách hàng 02", "01/05/2001", "Hải Dương", "0395436290"));
-//        customersList.add(new Customer("Khách hàng 03", "01/05/2001", "Hải Dương", "0395436290"));
-        for (Customer customer: customersList) {
+        customerDAO = new CustomerDAO(this);
+        customersList.addAll(customerDAO.getAllCustomer());
+        for (Customer customer : customersList) {
             customerNameList.add(customer.getName());
         }
         ArrayAdapter adapter = new ArrayAdapter(this,
@@ -69,24 +106,33 @@ public class AddBillActivity extends AppCompatActivity implements DatePickerDial
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCustomer.setAdapter(adapter);
 
-//        // When user select a List-Item.
-//        this.spinnerCustomer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Adapter adapter = parent.getAdapter();
-//                Customer customer = (Customer) adapter.getItem(position);
-//
-//                Toast.makeText(getApplicationContext(), "Selected Customer: " + customer.getName() ,Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
     }
 
+    public void getProduct() {
+        Log.e("TAG", "getProduct");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Product product = new Product();
+            product.setProductImage(bundle.getByteArray("image"));
+            product.setProductCode(bundle.getString("code"));
+            product.setProductName(bundle.getString("name"));
+            product.setProductPrice(bundle.getDouble("price"));
+            product.setProductSize(bundle.getString("size"));
+            productList.add(product);
+
+            tvTotalMoney.setText(String.valueOf(sumOfProductPrice()));
+        }
+
+    }
+
+    public double sumOfProductPrice() {
+        double totalMoney = 0;
+        for (Product product: productList) {
+            totalMoney += product.getProductPrice();;
+        }
+
+        return totalMoney;
+    }
     public void ngayTaoDon(View view) {
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.show(getSupportFragmentManager(), "date");
@@ -135,4 +181,5 @@ public class AddBillActivity extends AppCompatActivity implements DatePickerDial
 
         return super.onOptionsItemSelected(item);
     }
+
 }

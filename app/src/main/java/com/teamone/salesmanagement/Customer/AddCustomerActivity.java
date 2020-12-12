@@ -10,14 +10,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.CustomerDAO;
 
 public class AddCustomerActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    TextInputEditText tiePhone,tieName,tieDateOfBirth,tieAddress,tieID;
+    Toolbar toolbar;
+    EditText edtPhoneNumber, edtName, edtDateOfBirth, edtAddress, edtID;
     CustomerDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +28,23 @@ public class AddCustomerActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tieID = findViewById(R.id.tieID);
-        tiePhone = findViewById(R.id.tiePhone);
-        tieName = findViewById(R.id.tieName);
-        tieDateOfBirth = findViewById(R.id.tieDateOfBirth);
-        tieAddress = findViewById(R.id.tieAddress);
+        edtID = findViewById(R.id.edtID);
+        edtName = findViewById(R.id.edtName);
+        edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
+        edtDateOfBirth = findViewById(R.id.edtDateOfBirth);
+        edtAddress = findViewById(R.id.edtAddress);
     }
 
     public void addKhachHang(View view) {
         dao = new CustomerDAO(this);
-        String id = tieID.getText().toString();
-        String phone =  tiePhone.getText().toString();
-        String name = tieName.getText().toString();
-        String dateOfBirth = tieDateOfBirth.getText().toString();
-        String address = tieAddress.getText().toString();
+        String id = edtID.getText().toString();
+        String phone =  edtPhoneNumber.getText().toString();
+        String name = edtName.getText().toString();
+        String dateOfBirth = edtDateOfBirth.getText().toString();
+        String address = edtAddress.getText().toString();
         Customer customer = new Customer(id,phone,name,dateOfBirth,address);
         if (validate()<0){
             Dialog dialog = new Dialog(this);
@@ -84,24 +86,21 @@ public class AddCustomerActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            case R.id.themSanPham:
-                Intent intent = new Intent(AddCustomerActivity.this, AddCustomerActivity.class);
-                startActivity(intent);
-                break;
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(AddCustomerActivity.this, MainActivity.class);
+            startActivity(intent);
         }
-        return true;
+
+        return super.onOptionsItemSelected(item);
     }
+
     public int validate(){
         int check = 1;
-        if (tieID.getText().length()==0 || tiePhone.getText().length()==0
-                || tieName.getText().length()==0 || tieDateOfBirth.getText().length()==0
-                || tieAddress.getText().length()==0){
+        if (edtID.getText().length()==0 || edtPhoneNumber.getText().length()==0
+                || edtName.getText().length()==0 || edtDateOfBirth.getText().length()==0
+                || edtAddress.getText().length()==0){
             check =-1;
         }
         return check;

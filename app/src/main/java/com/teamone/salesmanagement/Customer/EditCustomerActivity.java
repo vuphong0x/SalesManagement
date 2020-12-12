@@ -2,6 +2,7 @@ package com.teamone.salesmanagement.Customer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -16,12 +17,19 @@ import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.CustomerDAO;
 
 public class EditCustomerActivity extends AppCompatActivity {
+    Toolbar toolbar;
     TextInputEditText tieDetailPhone,tieDetailName,tieDetailDateOfBirth,tieDetailAddress,tieDetailID;
     CustomerDAO dao  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_customer);
+
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tieDetailID = findViewById(R.id.tieDetailID);
         tieDetailPhone = findViewById(R.id.tieDetailPhone);
@@ -92,15 +100,20 @@ public class EditCustomerActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_delete,menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_delete, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(EditCustomerActivity.this, ListCustomerActivity.class);
+                startActivity(intent);
+                break;
             case R.id.delete:
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.xoa);
@@ -127,7 +140,8 @@ public class EditCustomerActivity extends AppCompatActivity {
                         }
                     }
                 });
+                break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

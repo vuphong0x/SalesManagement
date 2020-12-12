@@ -109,8 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="390dp">
 
-                    <ListView
-                        android:id="@+id/sanPhamDaChon"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSanPhamDaChon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </ScrollView>
@@ -147,7 +147,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tongTien"
+                    android:id="@+id/tvTongTien"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=".........."
@@ -185,7 +185,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="taoHoaDon"
+                android:onClick="addHoaDon"
                 android:text="Tạo hóa đơn"
                 android:background="@drawable/round_bg"
                 android:textSize="20dp"
