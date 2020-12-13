@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamone.salesmanagement.Customer.AddCustomerActivity;
 import com.teamone.salesmanagement.Customer.Customer;
+import com.teamone.salesmanagement.Customer.ListCustomerActivity;
 import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.Product.ListProductActivity;
 import com.teamone.salesmanagement.Product.Product;
@@ -87,16 +89,55 @@ import java.util.Random;
     }
 
     public void addHoaDon(View view) {
-        billDAO = new BillDAO(this);
-        Bill bill = new Bill();
-        bill.setMaHoaDon("HD" + new Random().nextInt(9999));
-        bill.setTenKhachHang(spinnerCustomer.getSelectedItem().toString());
-        bill.setTongTien(String.valueOf(sumOfProductPrice()));
-        bill.setDate(editTextNgayTaoDon.getText().toString());
-        billDAO.insertBill(bill);
-        Toast.makeText(this, "Successfully!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(AddBillActivity.this,ListBillActivity.class));
+        if (sumOfProductPrice()<=0 || editTextNgayTaoDon.getText().toString().isEmpty()){
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.them_that_bai);
+            Button btn = dialog.findViewById(R.id.btnThemThatBai);
+            dialog.show();
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            billDAO = new BillDAO(this);
+            Bill bill = new Bill();
+            bill.setMaHoaDon("HD" + new Random().nextInt(9999));
+            bill.setTenKhachHang(spinnerCustomer.getSelectedItem().toString());
+            bill.setTongTien(String.valueOf(sumOfProductPrice()));
+            bill.setDate(editTextNgayTaoDon.getText().toString());
+//        billDAO.insertBill(bill);
+//        Toast.makeText(this, "Successfully!", Toast.LENGTH_SHORT).show();
+//        startActivity(new Intent(AddBillActivity.this,ListBillActivity.class));
+            if (billDAO.insertBill(bill) > 0) {
+                Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.them_thanh_cong);
+                Button btn = dialog.findViewById(R.id.btnThemThanhCong);
+                dialog.show();
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(AddBillActivity.this, ListBillActivity.class));
+                        dialog.dismiss();
+                        restart();
+                    }
+                });
+            } else {
+                Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.them_that_bai);
+                Button btn = dialog.findViewById(R.id.btnThemThatBai);
+                dialog.show();
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }
     }
+
 
     public void getCustomer() {
         customerDAO = new CustomerDAO(this);
@@ -184,4 +225,7 @@ import java.util.Random;
         return super.onOptionsItemSelected(item);
     }
 
-}
+    public void restart(){
+        productList.clear();
+    }
+ }

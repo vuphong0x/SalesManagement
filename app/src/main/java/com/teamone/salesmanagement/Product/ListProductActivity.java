@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.ProductDAO;
 
@@ -88,7 +89,8 @@ public class ListProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                Intent intent1 = new Intent(ListProductActivity.this, MainActivity.class);
+                startActivity(intent1);;
                 break;
             case R.id.themSanPham:
                 Intent intent = new Intent(ListProductActivity.this, AddProductActivity.class);

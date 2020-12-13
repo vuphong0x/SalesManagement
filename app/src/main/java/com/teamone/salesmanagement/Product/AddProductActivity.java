@@ -24,6 +24,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.teamone.salesmanagement.Bill.AddBillActivity;
+import com.teamone.salesmanagement.Bill.ListBillActivity;
 import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.ProductDAO;
@@ -112,11 +114,47 @@ public class AddProductActivity extends AppCompatActivity {
             double productPrice = Double.parseDouble(edtProductPrice.getText().toString().trim());
             String productSize = edtProductSize.getText().toString().trim();
             Product product = new Product(byteArray, productCode, productName, productPrice, productSize);
-            dao.insertProduct(product);
-
-            Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(AddProductActivity.this,ListProductActivity.class);
-            startActivity(intent);
+  //          dao.insertProduct(product);
+            if (edtProductCode.getText().toString().isEmpty()||edtProductName.getText().toString().isEmpty()||edtProductPrice.getText().toString().isEmpty()||edtProductSize.getText().toString().isEmpty()){
+                Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.them_that_bai);
+                Button btn = dialog.findViewById(R.id.btnThemThatBai);
+                dialog.show();
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }else {
+                if (dao.insertProduct(product) > 0) {
+                    Dialog dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.them_thanh_cong);
+                    Button btn = dialog.findViewById(R.id.btnThemThanhCong);
+                    dialog.show();
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(AddProductActivity.this, ListProductActivity.class));
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    Dialog dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.them_that_bai);
+                    Button btn = dialog.findViewById(R.id.btnThemThatBai);
+                    dialog.show();
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
+            }
+//            Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(AddProductActivity.this,ListProductActivity.class);
+//            startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }

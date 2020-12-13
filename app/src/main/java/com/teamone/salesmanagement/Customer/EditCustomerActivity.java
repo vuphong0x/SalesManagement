@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.teamone.salesmanagement.R;
@@ -18,7 +19,8 @@ import com.teamone.salesmanagement.database.CustomerDAO;
 
 public class EditCustomerActivity extends AppCompatActivity {
     Toolbar toolbar;
-    TextInputEditText tieDetailPhone,tieDetailName,tieDetailDateOfBirth,tieDetailAddress,tieDetailID;
+    TextInputEditText tieDetailPhone,tieDetailName,tieDetailDateOfBirth,tieDetailAddress;
+    TextView tieDetailID;
     CustomerDAO dao  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
