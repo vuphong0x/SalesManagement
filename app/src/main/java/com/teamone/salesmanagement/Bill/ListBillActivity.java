@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.Product.ProductAdapter;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.BillDAO;
@@ -57,7 +58,8 @@ public class ListBillActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                Intent intent1 = new Intent(ListBillActivity.this, MainActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.themSanPham:
                 Intent intent = new Intent(ListBillActivity.this, AddBillActivity.class);

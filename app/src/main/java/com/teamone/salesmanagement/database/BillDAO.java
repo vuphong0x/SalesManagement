@@ -38,6 +38,7 @@ public class BillDAO {
             bill.setMaHoaDon(cursor.getString(cursor.getColumnIndex("billId")));
             bill.setTenKhachHang(cursor.getString(cursor.getColumnIndex("customerName")));
             bill.setTongTien(cursor.getString(cursor.getColumnIndex("totalMoney")));
+            bill.setDate(cursor.getString(cursor.getColumnIndex("date")));
             billList.add(bill);
             cursor.moveToNext();
         }
@@ -50,6 +51,7 @@ public class BillDAO {
         values.put("billId", bill.getMaHoaDon());
         values.put("customerName", bill.getTenKhachHang());
         values.put("totalMoney", bill.getTongTien());
+        values.put("date",bill.getDate());
         try {
             if (db.insert(BillDAO.BILL_TABLE_NAME, null, values) < 0) {
                 return -1;
@@ -82,7 +84,31 @@ public class BillDAO {
 
     public double getDoanhThuTheoNgay() {
         double doanhThu = 0;
-        String SQL = "SELECT SUM(totalMoney) FROM bill";
+        String SQL = "SELECT SUM(totalMoney) FROM bill where bill.date = date('now')";
+        Cursor cursor = db.rawQuery(SQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            doanhThu = cursor.getDouble(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return doanhThu;
+    }
+    public double getDoanhThuTheoThang() {
+        double doanhThu = 0;
+        String SQL = "SELECT SUM(totalMoney) FROM bill where strftime('%m',bill.date) = strftime('%m','now')";
+        Cursor cursor = db.rawQuery(SQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            doanhThu = cursor.getDouble(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return doanhThu;
+    }
+    public double getDoanhThuTheoNam() {
+        double doanhThu = 0;
+        String SQL = "SELECT SUM(totalMoney) FROM bill where strftime('%Y',bill.date) = strftime('%Y','now')";
         Cursor cursor = db.rawQuery(SQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

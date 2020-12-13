@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamone.salesmanagement.Customer.AddCustomerActivity;
 import com.teamone.salesmanagement.Customer.Customer;
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.Product.ListProductActivity;
 import com.teamone.salesmanagement.Product.Product;
 import com.teamone.salesmanagement.Product.ProductAdapter;
@@ -49,7 +50,7 @@ import java.util.Random;
     private Toolbar toolbar;
     private RecyclerView rvSanPhamDaChon;
     ProductOnBillAdapter productOnBillAdapter;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     CustomerDAO customerDAO;
     BillDAO billDAO;
 
@@ -91,8 +92,10 @@ import java.util.Random;
         bill.setMaHoaDon("HD" + new Random().nextInt(9999));
         bill.setTenKhachHang(spinnerCustomer.getSelectedItem().toString());
         bill.setTongTien(String.valueOf(sumOfProductPrice()));
+        bill.setDate(editTextNgayTaoDon.getText().toString());
         billDAO.insertBill(bill);
         Toast.makeText(this, "Successfully!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(AddBillActivity.this,ListBillActivity.class));
     }
 
     public void getCustomer() {
@@ -119,10 +122,8 @@ import java.util.Random;
             product.setProductPrice(bundle.getDouble("price"));
             product.setProductSize(bundle.getString("size"));
             productList.add(product);
-
             tvTotalMoney.setText(String.valueOf(sumOfProductPrice()));
         }
-
     }
 
     public double sumOfProductPrice() {
@@ -176,7 +177,8 @@ import java.util.Random;
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
+            Intent intent = new Intent(AddBillActivity.this, MainActivity.class);
+            startActivity(intent);// close this activity and return to preview activity (if there is any)
         }
 
         return super.onOptionsItemSelected(item);

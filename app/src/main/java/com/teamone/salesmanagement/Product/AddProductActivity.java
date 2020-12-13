@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.ProductDAO;
 
@@ -98,7 +99,12 @@ public class AddProductActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
-            bitmap.recycle();
+            Log.d("AAA", "addProduct: " + byteArray);
+//            if (bitmap != null && !bitmap.isRecycled()) {
+//                bitmap.recycle();
+//                bitmap = null;
+//            }
+
 
             // get data from EditText
             String productCode = edtProductCode.getText().toString().trim();
@@ -107,7 +113,10 @@ public class AddProductActivity extends AppCompatActivity {
             String productSize = edtProductSize.getText().toString().trim();
             Product product = new Product(byteArray, productCode, productName, productPrice, productSize);
             dao.insertProduct(product);
+
             Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AddProductActivity.this,ListProductActivity.class);
+            startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,7 +155,8 @@ public class AddProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
+            Intent intent1 = new Intent(AddProductActivity.this, MainActivity.class); // close this activity and return to preview activity (if there is any)
+            startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);

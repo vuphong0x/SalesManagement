@@ -3,12 +3,14 @@ package com.teamone.salesmanagement.Bill;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,7 @@ import com.teamone.salesmanagement.database.ProductDAO;
 import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
+    private static final String TAG = "AAA";
     List<Bill> billList;
     BillDAO billDAO;
 
@@ -41,6 +44,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.tvBillId.setText("Mã hóa đơn: " + billList.get(position).getMaHoaDon());
         holder.tvCustomerName.setText("Khách hàng: " + billList.get(position).getTenKhachHang());
         holder.tvTotalMoney.setText("Tổng tiền:" + billList.get(position).getTongTien() + " VND");
+        holder.tvNgay.setText("Ngày mua: " +billList.get(position).getDate());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +65,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
 //
 //
 //                dialog.show();
+                Log.d(TAG, "onClick: " + billDAO.getAllBill().get(position).getDate());
             }
         });
     }
@@ -73,6 +78,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvBillId, tvCustomerName, tvTotalMoney;
         ImageButton btnDelete;
+        private TextView tvNgay;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +88,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
             tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
             tvTotalMoney = itemView.findViewById(R.id.tvTotalMoney);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvNgay = itemView.findViewById(R.id.tv_ngay);
         }
     }
 

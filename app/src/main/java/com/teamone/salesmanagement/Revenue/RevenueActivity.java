@@ -35,7 +35,8 @@ public class RevenueActivity extends AppCompatActivity {
 
         billDAO = new BillDAO(this);
         double doanhThu = billDAO.getDoanhThuTheoNgay();
-
+        double doanhThu1 = billDAO.getDoanhThuTheoThang();
+        double doanhThu2 = billDAO.getDoanhThuTheoNam();
         // PieChart Revenue
         chartDayRevenue = findViewById(R.id.chartDayRevenue);
         chartMonthRevenue = findViewById(R.id.chartMonthRevenue);
@@ -44,10 +45,10 @@ public class RevenueActivity extends AppCompatActivity {
         // Data
         ArrayList<PieEntry> visitors = new ArrayList<>();
         visitors.add(new PieEntry((float) doanhThu, "Thu về"));
-        visitors.add(new PieEntry((float) (doanhThu + new Random().nextInt(123)), "Dự kiến"));
+        visitors.add(new PieEntry((float) 400000, "Dự kiến"));
         PieDataSet pieDataSet = new PieDataSet(visitors, "");
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextColor(Color.parseColor("#000000"));
         pieDataSet.setValueTextSize(16f);
         PieData pieData = new PieData(pieDataSet);
         chartDayRevenue.setData(pieData);
@@ -55,11 +56,11 @@ public class RevenueActivity extends AppCompatActivity {
         chartDayRevenue.animate();
 
         ArrayList<PieEntry> visitors1 = new ArrayList<>();
-        visitors1.add(new PieEntry((float) doanhThu, "Thu về"));
-        visitors1.add(new PieEntry((float) (doanhThu * new Random().nextInt(123)), "Dự kiến"));
+        visitors1.add(new PieEntry((float) doanhThu1, "Thu về"));
+        visitors1.add(new PieEntry((float) 12000000, "Dự kiến"));
         PieDataSet pieDataSet1 = new PieDataSet(visitors1, "");
         pieDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet1.setValueTextColor(Color.BLACK);
+        pieDataSet1.setValueTextColor(Color.parseColor("#000000"));
         pieDataSet1.setValueTextSize(16f);
         PieData pieData1 = new PieData(pieDataSet1);
         chartMonthRevenue.setData(pieData1);
@@ -67,11 +68,11 @@ public class RevenueActivity extends AppCompatActivity {
         chartMonthRevenue.animate();
 
         ArrayList<PieEntry> visitors2 = new ArrayList<>();
-        visitors2.add(new PieEntry((float) doanhThu, "Thu về"));
-        visitors2.add(new PieEntry((float) (doanhThu * new Random().nextInt(1232)), "Dự kiến"));
+        visitors2.add(new PieEntry((float) doanhThu2, "Thu về"));
+        visitors2.add(new PieEntry((float) 140000000, "Dự kiến"));
         PieDataSet pieDataSet2 = new PieDataSet(visitors2, "");
         pieDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet2.setValueTextColor(Color.BLACK);
+        pieDataSet2.setValueTextColor(Color.parseColor("#000000"));
         pieDataSet2.setValueTextSize(16f);
         PieData pieData2 = new PieData(pieDataSet2);
         chartYearRevenue.setData(pieData2);
