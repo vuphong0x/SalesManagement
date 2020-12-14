@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,6 +47,8 @@ public class ProductOnBillAdapter extends RecyclerView.Adapter<ProductOnBillAdap
             public void onClick(View view) {
                 Product nd = productList.get(position);
                 productList.remove(nd);//xoa trong list
+                double price = sumOfProductPrice();
+                AddBillActivity.update_counter(String.valueOf(price));
                 notifyDataSetChanged();//cap nhat list
             }
         });
@@ -69,6 +72,13 @@ public class ProductOnBillAdapter extends RecyclerView.Adapter<ProductOnBillAdap
             tvSize = itemView.findViewById(R.id.tvSize1);
             imageButtonArrow = itemView.findViewById(R.id.imageButtonArrow1);
         }
+    }
+    public double sumOfProductPrice() {
+        double totalMoney = 0;
+        for (Product product: productList) {
+            totalMoney += product.getProductPrice();;
+        }
+        return totalMoney;
     }
 
     // convert from byte array to bitmap

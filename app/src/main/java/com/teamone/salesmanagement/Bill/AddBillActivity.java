@@ -44,7 +44,6 @@ import java.util.Random;
 
  public class AddBillActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText editTextNgayTaoDon;
-    TextView tvTotalMoney;
     private Spinner spinnerCustomer;
     private List<Customer> customersList;
     public static List<Product> productList = new ArrayList<>();
@@ -65,7 +64,7 @@ import java.util.Random;
         toolbar = findViewById(R.id.toolbaraddbill);
         setSupportActionBar(toolbar);
 
-        tvTotalMoney = findViewById(R.id.tvTongTien);
+        tvTongTien = findViewById(R.id.tvTongTien);
         editTextNgayTaoDon = findViewById(R.id.edNgayTaoDOn);
         spinnerCustomer = findViewById(R.id.spinnerCustomer);
         rvSanPhamDaChon = findViewById(R.id.rvSanPhamDaChon);
@@ -87,6 +86,16 @@ import java.util.Random;
         productOnBillAdapter = new ProductOnBillAdapter(productList);
         rvSanPhamDaChon.setAdapter(productOnBillAdapter);
     }
+
+     public static TextView tvTongTien;
+     public static  void update_counter(String value){
+         try{
+             tvTongTien.setText(value + "VND");
+         }
+         catch (Exception ex){
+             Log.d("Exception","Exception of type"+ex.getMessage());
+         }
+     }
 
     public void addHoaDon(View view) {
         if (sumOfProductPrice()<=0 || editTextNgayTaoDon.getText().toString().isEmpty()){
@@ -163,7 +172,7 @@ import java.util.Random;
             product.setProductPrice(bundle.getDouble("price"));
             product.setProductSize(bundle.getString("size"));
             productList.add(product);
-            tvTotalMoney.setText(String.valueOf(sumOfProductPrice()));
+            tvTongTien.setText(String.valueOf(sumOfProductPrice()));
         }
     }
 
