@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,19 +17,61 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teamone.salesmanagement.Product.Product;
+import com.teamone.salesmanagement.Product.ProductAdapter;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.BillDAO;
 import com.teamone.salesmanagement.database.ProductDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     private static final String TAG = "AAA";
     List<Bill> billList;
+    List<Bill> billListsort;
     BillDAO billDAO;
+    CustomFilter customFilter;
 
     public BillAdapter(List<Bill> billList) {
         this.billList = billList;
+        this.billListsort=billList;
+    }
+    public Filter getFilter() {
+        if (customFilter == null){
+            customFilter = new CustomFilter();
+        }
+        return customFilter;
+    }
+    private class CustomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if(constraint!=null || constraint.length()>0){
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<Bill> filter = new ArrayList<>();
+                for (int i=0; i<billListsort.size();i++){
+                    if(billListsort.get(i).getMaHoaDon().toUpperCase().contains(constraint)||billListsort.get(i).getDate().toUpperCase().contains(constraint)){
+                        Bill bill1 = new Bill(billListsort.get(i).getMaHoaDon(),
+                                billListsort.get(i).getTenKhachHang(),
+                                billListsort.get(i).getTongTien(),
+                                billListsort.get(i).getDate());
+                        filter.add(bill1);
+                    }
+                }
+                results.count = filter.size();
+                results.values=filter;
+            }else {
+                results.count = billListsort.size();
+                results.values=billListsort;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            billList = (ArrayList<Bill>) results.values;
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull

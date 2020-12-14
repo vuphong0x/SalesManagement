@@ -6,25 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.teamone.salesmanagement.Product.Product;
+import com.teamone.salesmanagement.Product.ProductAdapter;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.CustomerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAdapter extends BaseAdapter {
     Context context;
     List<Customer> customerList;
+    List<Customer> customerListSort;
     CustomerDAO dao;
     private LayoutInflater inflater;
-
+CustomFilter customFilter;
     public CustomerAdapter(Context context, List<Customer> customerList) {
         this.context = context;
         this.customerList = customerList;
         this.inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         dao = new CustomerDAO(context);
+        this.customerListSort = customerList;
     }
 
     @Override
@@ -91,5 +97,43 @@ public class CustomerAdapter extends BaseAdapter {
     public static class ViewHolder{
         TextView name,phone,dateOfBirth;
         ImageView img;
+    }
+
+    public Filter getFilter() {
+        if (customFilter == null){
+            customFilter = new CustomFilter();
+        }
+        return customFilter;
+    }
+    private class CustomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if(constraint==null || constraint.length()==0){
+                results.values = customerListSort;
+                results.count=customerListSort.size();
+            }else {
+                List<Customer> customers = new ArrayList<>();
+                for (Customer p: customerList){
+                    if(p.getPhone().toUpperCase().startsWith(constraint.toString().toUpperCase()))customers.add(p);
+                }
+                results.values=customers;
+                results.count=customers.size();
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            if (results.count==0){
+                notifyDataSetChanged();
+            }else {
+                customerList=(List<Customer>)results.values;
+                notifyDataSetChanged();
+            }
+        }
+    }
+    public void resetData1(){
+        customerList=customerListSort;
     }
 }

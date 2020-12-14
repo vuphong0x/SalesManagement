@@ -172,7 +172,6 @@ import java.util.Random;
         for (Product product: productList) {
             totalMoney += product.getProductPrice();;
         }
-
         return totalMoney;
     }
     public void ngayTaoDon(View view) {
@@ -218,6 +217,7 @@ import java.util.Random;
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
+            restart();
             Intent intent = new Intent(AddBillActivity.this, MainActivity.class);
             startActivity(intent);// close this activity and return to preview activity (if there is any)
         }
@@ -228,4 +228,5 @@ import java.util.Random;
     public void restart(){
         productList.clear();
     }
+
  }

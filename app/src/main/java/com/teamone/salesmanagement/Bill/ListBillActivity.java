@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.teamone.salesmanagement.MainActivity;
 import com.teamone.salesmanagement.Product.ProductAdapter;
@@ -47,6 +50,19 @@ public class ListBillActivity extends AppCompatActivity {
         rvBill.setLayoutManager(layoutManager);
         adapter = new BillAdapter(billList);
         rvBill.setAdapter(adapter);
+        EditText searchB = findViewById(R.id.searchB);
+        searchB.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.getFilter().filter(charSequence);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -13,6 +13,11 @@
         android:background="#ffca60"
         app:title="Danh sách khách hàng"
         app:titleMarginStart="60dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchC"
+        android:hint="Tìm kiếm khách hàng theo số điện thoại"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,15 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,12 +19,58 @@ import com.teamone.salesmanagement.Bill.AddBillActivity;
 import com.teamone.salesmanagement.R;
 import com.teamone.salesmanagement.database.ProductDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private List<Product> productList;
+    private List<Product> productListSort;
     private OnItemClickListener listener;
     private ProductDAO dao;
+    private Filter PFilter;
+    CustomFilter customFilter;
+    @Override
+    public int getItemCount() {
+        return productList.size();
+    }
+    public Filter getFilter() {
+        if (customFilter == null){
+            customFilter = new CustomFilter();
+        }
+        return customFilter;
+    }
+    private class CustomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if(constraint!=null || constraint.length()>0){
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<Product> filter = new ArrayList<>();
+                for (int i=0; i<productListSort.size();i++){
+                    if(productListSort.get(i).getProductName().toUpperCase().contains(constraint)){
+                        Product product1 = new Product(productListSort.get(i).getProductImage(),
+                                productListSort.get(i).getProductCode(),
+                                productListSort.get(i).getProductName(),
+                                productListSort.get(i).getProductPrice(),
+                                productListSort.get(i).getProductSize());
+                        filter.add(product1);
+                    }
+                }
+                results.count = filter.size();
+                results.values=filter;
+            }else {
+                results.count = productListSort.size();
+                results.values=productListSort;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+           productList = (ArrayList<Product>) results.values;
+           notifyDataSetChanged();
+        }
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -38,6 +82,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public ProductAdapter(List<Product> productList) {
         this.productList = productList;
+        this.productListSort = productList;
     }
 
     @NonNull
@@ -85,10 +130,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return productList.size();
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProduct;

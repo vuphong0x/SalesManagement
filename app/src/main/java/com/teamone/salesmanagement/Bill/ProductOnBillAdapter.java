@@ -29,7 +29,7 @@ public class ProductOnBillAdapter extends RecyclerView.Adapter<ProductOnBillAdap
     @NonNull
     @Override
     public ProductOnBillAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_san_pham, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_on_bill, parent, false);
         productDAO = new ProductDAO(parent.getContext());
         return new ViewHolder(view);
     }
@@ -41,7 +41,14 @@ public class ProductOnBillAdapter extends RecyclerView.Adapter<ProductOnBillAdap
         holder.tvName.setText(productList.get(position).getProductName());
         holder.tvSize.setText(productList.get(position).getProductSize());
         holder.tvPrice.setText(String.valueOf(productList.get(position).getProductPrice()));
-        holder.imageButtonArrow.setVisibility(View.GONE);
+        holder.imageButtonArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Product nd = productList.get(position);
+                productList.remove(nd);//xoa trong list
+                notifyDataSetChanged();//cap nhat list
+            }
+        });
     }
 
     @Override
@@ -56,16 +63,20 @@ public class ProductOnBillAdapter extends RecyclerView.Adapter<ProductOnBillAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgProduct = itemView.findViewById(R.id.imgProduct);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
-            tvSize = itemView.findViewById(R.id.tvSize);
-            imageButtonArrow = itemView.findViewById(R.id.imageButtonArrow);
+            imgProduct = itemView.findViewById(R.id.imgProduct1);
+            tvName = itemView.findViewById(R.id.tvName1);
+            tvPrice = itemView.findViewById(R.id.tvPrice1);
+            tvSize = itemView.findViewById(R.id.tvSize1);
+            imageButtonArrow = itemView.findViewById(R.id.imageButtonArrow1);
         }
     }
 
     // convert from byte array to bitmap
     public static Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+    public void changeSataset(List<Product> ls){
+        this.productList = ls;
+        notifyDataSetChanged();
     }
 }

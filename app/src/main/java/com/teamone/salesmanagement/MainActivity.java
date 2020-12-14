@@ -2,9 +2,12 @@ package com.teamone.salesmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.teamone.salesmanagement.Bill.ListBillActivity;
 import com.teamone.salesmanagement.Customer.ListCustomerActivity;
@@ -31,8 +34,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doanhThu(View view) {
-        Intent intent = new Intent(MainActivity.this, RevenueActivity.class);
-        startActivity(intent);
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.muc_tieu);
+        EditText editText = dialog.findViewById(R.id.tvMucTieu);
+        Button button = dialog.findViewById(R.id.btnTT);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RevenueActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble("MT", Double.parseDouble(editText.getText().toString()));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+dialog.show();
     }
 
     public void khachHang(View view) {
